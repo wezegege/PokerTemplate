@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/pokerTemplate.dir/home/wezegege/Documents/projects/pokerTemplate/src/main.cpp.o  -o /home/wezegege/Documents/projects/pokerTemplate/bin/pokerTemplate -rdynamic 

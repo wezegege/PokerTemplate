@@ -1,0 +1,109 @@
+/**
+ * @author Kevin TRAN
+ * @date %%DATE%%
+ * @section LICENSE
+ *
+ * This file is part of %%PROJECT%%.
+ * 
+ * %%PROJECT%% is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * %%PROJECT%% is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with %%PROJECT%%.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @section DESCRIPTION
+ *
+ * Header for class %%CLASS%%
+ */
+ 
+#ifndef %%PROJECT-u%%_%%CLASS-u%%_H_
+#define %%PROJECT-u%%_%%CLASS-u%%_H_
+
+//- includes
+//-- personnal includes
+
+//-- system includes
+
+//-- forward declarations
+
+/**
+
+*/
+public class %%CLASS%% {
+//- public
+public:
+//-- typedefs and enums
+
+//-- constants
+	
+//-- methods
+	/**
+	 * 
+	 * @param
+	 * @return
+	 */
+
+//-- operator overloads
+
+//-- constructors - destructor
+	/**
+	 * default constructor
+	 */
+	%%CLASS%%();
+
+	/*
+
+	 * Destructor
+	 */
+	~%%CLASS%%();
+
+
+//- protected
+protected:
+//-- typedefs and enums
+
+//-- constants
+
+//-- methods
+
+//-- data members
+
+//- private
+private:
+//-- typedefs and enums
+
+//-- constants
+
+//-- methods
+
+	/**
+	 * assignment operator overload
+	 * @param a%%CLASS%% the value of the assignment
+	 * @return a reference to itself
+	 */
+	##CLASS## & operator=(const %%CLASS%% & a%%CLASS%%);
+	
+	/**
+	 * copy constructor
+	 * @param a%%CLASS%% the value of the assignment
+	 */
+	explicit %%CLASS%%(const & %%CLASS%% a%%CLASS%%);
+	
+//-- data members
+
+} // class %%CLASS%%
+
+//- nonmember functions
+
+//- inline and template definitions file include
+//#include "%%CLASS-l%%.tpp"
+
+#endif // %%PROJECT-u%%_%%CLASS-u%%_H_
+
