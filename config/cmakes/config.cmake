@@ -5,11 +5,9 @@ set(project_name pokertemplate)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.8)
 
-set(MAJOR_VERSION 0)
-set(MINOR_VERSION 0)
-set(PATCH 1)
-
-set(VERSION "v${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH}")
+execute_process(COMMAND git describe --abbrev=4 HEAD
+  OUTPUT_VARIABLE VERSION
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 set(separator "--------------------------------------------------")
 message(STATUS ${separator})
@@ -53,7 +51,7 @@ set(res_dir ${bin_dir}/resources)
 set(doxyfile_in ${config_dir}/Doxyfile.in)
 set(doxyfile_out ${build_dir}/Doxyfile)
 
-#libraries
+#ibraries
 
 set(include_dirs "")
 set(lib_dirs "")
