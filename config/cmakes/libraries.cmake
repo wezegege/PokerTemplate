@@ -1,3 +1,12 @@
+message(STATUS ${separator})
+message(STATUS "Creating libraries")
+
+file(
+  GLOB_RECURSE
+  common_files
+  ${srccmn_dir}/*
+  )
+
 file(
   GLOB
   modules
@@ -7,6 +16,8 @@ file(
 
 foreach(module ${modules})
 
+  message(STATUS "  Found module ${module}")
+
   file(
     GLOB
     libraries
@@ -15,6 +26,9 @@ foreach(module ${modules})
     )
 
   foreach(library ${libraries})
+
+    message(STATUS "    Found library ${library} in module ${module}")
+
     file(
       GLOB_RECURSE
       source_files
@@ -25,7 +39,9 @@ foreach(module ${modules})
       ${library}
       SHARED
       ${source_files}
-      )
+      ${common_files}
+     )
+
 
     target_link_libraries(
       ${library}

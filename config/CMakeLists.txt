@@ -6,7 +6,6 @@ cmake_minimum_required(VERSION ${CMAKE_BACKWARDS_COMPATIBILITY})
 
 project(${project_name})
 
-include_directories(${include_dirs})
 link_directories(${lib_dirs})
 
 include(binaries)
@@ -22,10 +21,13 @@ if(${doInstall})
 endif(${doInstall})
 
 if(${doArchive})
+  message(STATUS "Making archive target")
   include(archive)
 endif(${doArchive})
 
 if(${doTests})
+  message(STATUS "Making tests target")
   include(tests)
 endif(${doTests})
 
+message(STATUS "--------------------------------------------------")
