@@ -30,6 +30,8 @@ foreach(binary ${binaries})
     ${common_files}
     )
 
+  include_directories(${srcbin_dir}/${binary})
+
   target_link_libraries(
     ${binary}
     ${link_libraries}

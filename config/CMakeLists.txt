@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION ${CMAKE_BACKWARDS_COMPATIBILITY})
 
 project(${project_name})
 
+include_directories(${include_dirs})
 link_directories(${lib_dirs})
 
 include(binaries)

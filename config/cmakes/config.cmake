@@ -51,10 +51,10 @@ set(res_dir ${bin_dir}/resources)
 set(doxyfile_in ${config_dir}/Doxyfile.in)
 set(doxyfile_out ${build_dir}/Doxyfile)
 
-#ibraries
+#libraries
 
-set(include_dirs "")
-set(lib_dirs "")
+set(include_dirs ${srccmn_dir} /usr/include)
+set(lib_dirs /usr/lib)
 set(link_libraries "")
 
 #documentation
