@@ -55,7 +55,7 @@ class ThreadManager {
      *
      * @param index
      */
-    virtual void Join(int index) = 0;
+    virtual void Join(int index = 0) = 0;
 
     /**
      *

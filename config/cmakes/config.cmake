@@ -55,7 +55,7 @@ set(doxyfile_out ${build_dir}/Doxyfile)
 
 set(include_dirs ${srccmn_dir} /usr/include)
 set(lib_dirs /usr/lib)
-set(link_libraries "")
+set(link_libraries pthread)
 
 #documentation
 

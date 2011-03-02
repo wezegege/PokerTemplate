@@ -31,6 +31,7 @@
 
 //-- system includes
 #include <boost/shared_ptr.hpp>
+#include <pthread.h>
 
 //-- forward declarations
 
@@ -47,11 +48,22 @@ class Thread {
     //-- constants
 
     //-- methods
-    /**
-     * Entry point for new thread creating
-     */
-    virtual void Run()=0;
 
+    /**
+     * Provides the means to create the thread and start it going.
+     * @return result of the thread creation code
+     */
+    int Start();
+
+    /**
+     *
+     */
+    int Cancel();
+
+    /**
+     *
+     */
+    int Join();
 
     //-- operator overloads
 
@@ -75,6 +87,20 @@ class Thread {
     //-- constants
 
     //-- methods
+
+    /**
+     *
+     */
+    virtual int Run() = 0;
+
+    /**
+     * This function serves as the entry point to the thread. 
+     * It simply casts pthis to Thread * and calls its run method.
+     * @param pthis pointer to the thread class to launch
+     * @return exit status of the thread id exited
+     */
+    static void * EntryPoint(void * pthis);
+
 
     //-- data members
 
@@ -100,6 +126,8 @@ class Thread {
     explicit Thread(const Thread & aThread);
 
     //-- data members
+
+    pthread_t threadId_; ///< Id of the thread if created
 
 }; // class Thread
 

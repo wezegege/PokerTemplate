@@ -44,6 +44,18 @@
 
 //-- methods
 
+int Thread::Start() {
+  return pthread_create(& threadId_, 0, Thread::EntryPoint, this);
+}
+
+int Thread::Cancel() {
+  return pthread_cancel(threadId_);
+}
+
+int Thread::Join() {
+  return pthread_join(threadId_, 0);
+}
+
 //-- class methods
 
 //-- operator overloads
@@ -67,6 +79,14 @@ Thread::~Thread() {
 //- protected
 
 //-- methods
+
+//-- static
+
+void * Thread::EntryPoint(void * pthis) {
+  Ptr thread(reinterpret_cast<Thread *>(pthis));
+  thread->Run();
+  return 0;
+}
 
 //- private
 

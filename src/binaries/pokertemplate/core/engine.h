@@ -42,6 +42,10 @@ class Engine : public ThreadManager {
   //- public
   public:
     //-- typedefs and enums
+ 
+    class NoThreadException {};
+
+    class WrongThreadException {};
 
     //-- constants
 
@@ -50,18 +54,18 @@ class Engine : public ThreadManager {
      *
      * @param thread
      */
-    virtual void Create(Thread::Ptr thread);
+    virtual void Create(Thread::Ptr thread) throw(WrongThreadException);
 
     /**
      *
-     * @param index
+     * @param 
      */
-    virtual void Join(int index);
+    virtual void Join(int) throw(NoThreadException);
 
     /**
      *
      */
-    virtual void Destroy();
+    virtual void Destroy() throw(NoThreadException);
 
     //-- operator overloads
 
