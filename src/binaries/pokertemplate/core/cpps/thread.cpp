@@ -83,7 +83,7 @@ Thread::~Thread() {
 //-- static
 
 void * Thread::EntryPoint(void * pthis) {
-  Ptr thread(reinterpret_cast<Thread *>(pthis));
+  Thread * thread = reinterpret_cast<Thread *>(pthis);
   thread->Run();
   return 0;
 }

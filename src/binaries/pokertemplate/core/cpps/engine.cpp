@@ -63,7 +63,7 @@ void Engine::Destroy() throw(NoThreadException) {
   if(thread_ == 0) {
     throw NoThreadException();
   }
-  thread_->Join();
+  thread_->Cancel();
 }
 
 //-- class methods

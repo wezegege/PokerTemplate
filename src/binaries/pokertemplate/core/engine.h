@@ -42,11 +42,7 @@ class Engine : public ThreadManager {
   //- public
   public:
     //-- typedefs and enums
- 
-    class NoThreadException {};
-
-    class WrongThreadException {};
-
+    
     //-- constants
 
     //-- methods

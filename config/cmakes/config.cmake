@@ -17,7 +17,7 @@ message(STATUS "Configuring ${project_name} ${VERSION}")
 
 option(doInstall "Whether to create the install target" OFF)
 option(doDocumentation "Whether to create the doc target" ON)
-option(doTests "Whether to create the test target" OFF)
+option(doTests "Whether to create the test target" ON)
 option(doArchive "Whether to create the archive" OFF)
 
 message(STATUS "  Building install module : ${doInstall}")
@@ -37,9 +37,8 @@ set(srccmn_dir ${source_dir}/common)
 set(build_dir ${project_dir}/build)
 set(config_dir ${project_dir}/config)
 
-set(test_dir ${project_dir}/tests)
-set(tstbin_dir ${test_dir}/binaries)
-set(tstlib_dir ${test_dir}/libraries)
+set(test_dir ${source_dir}/tests)
+set(testbin_dir ${project_dir}/tests)
 
 set(bin_dir ${project_dir}/bin)
 set(lib_dir ${bin_dir}/libs)

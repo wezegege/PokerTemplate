@@ -41,6 +41,9 @@ class ThreadManager {
   //- public
   public:
     //-- typedefs and enums
+class NoThreadException {};
+
+    class WrongThreadException {};
 
     //-- constants
 
@@ -55,7 +58,7 @@ class ThreadManager {
      *
      * @param index
      */
-    virtual void Join(int index = 0) = 0;
+    virtual void Join(int index) = 0;
 
     /**
      *

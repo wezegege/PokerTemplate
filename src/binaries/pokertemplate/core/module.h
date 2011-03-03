@@ -54,7 +54,7 @@ class Module : public ThreadManager {
      *
      * @param thread
      */
-    virtual void Create(Thread::Ptr thread);
+    virtual void Create(Thread::Ptr thread) throw (WrongThreadException);
 
     /**
      *

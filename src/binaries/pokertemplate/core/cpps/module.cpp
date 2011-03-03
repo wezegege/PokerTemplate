@@ -30,6 +30,8 @@
 
 //-- system includes
 
+using std::vector;
+
 //- miscellanous
 
 //-- constants
@@ -44,17 +46,24 @@
 
 //-- methods
 
-void Module::Create(Thread::Ptr thread) {
-
+void Module::Create(Thread::Ptr thread) throw(WrongThreadException) {
+ if(thread == 0) {
+  throw WrongThreadException();
+ }
+ thread->Start();
+ threads_.push_back(thread);
 }
 
 void Module::Join(int index) {
-
+  threads_.at(index)->Join();
 }
 
 
 void Module::Destroy() {
-
+  vector<Thread::Ptr>::iterator it = threads_.begin();
+  for(; it < threads_.end(); ++it) {
+    (*it)->Cancel();
+  }
 }
 
 //-- class methods

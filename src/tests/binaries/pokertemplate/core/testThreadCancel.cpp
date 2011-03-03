@@ -1,6 +1,6 @@
 /**
  * @author Kevin TRAN
- * @date 01/03/2011
+ * @date 02/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -20,11 +20,12 @@
  *
  * @section DESCRIPTION
  *
- * exe entry for binary pokertemplate
+ * Main entry.
  */
 
 //- includes
 //-- personnal includes
+#include "core/thread.h"
 
 //-- system includes
 #include <iostream>
@@ -32,11 +33,23 @@ using std::cout;
 using std::endl;
 #include <cstdlib>
 
+class TestThread : public Thread {
+  public:
+    int Run() {
+      for(;;)
+        cout << "running" << endl;
+      return 0;
+    }
+};
+
 /**
  *
  */
-int main(int argc, char** argv) {
-  cout << "Hello World !" << endl;
+int testThreadCancel(int argc, char** argv) {
+  TestThread thread;
+  thread.Start();
+  thread.Cancel();
 
   return EXIT_SUCCESS;
 }
+
