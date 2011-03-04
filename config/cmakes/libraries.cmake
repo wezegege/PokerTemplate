@@ -1,10 +1,14 @@
-message(STATUS ${separator})
-message(STATUS "Creating libraries")
 
 file(
   GLOB_RECURSE
   common_files
-  ${srccmn_dir}/*
+  ${srccmn_dir}/*.cpp
+  )
+
+file(
+  GLOB_RECURSE
+  common_headers
+  ${srccmn_dir}/*.h
   )
 
 file(
@@ -35,11 +39,19 @@ foreach(module ${modules})
       ${srclib_dir}/${module}/${library}/*
       )
 
+    file(
+      GLOB_RECURSE
+      headers_files
+      ${srclib_dir}/${module}/${library}/*
+      )
+
     add_library(
       ${library}
       SHARED
       ${source_files}
+      ${headers_files}
       ${common_files}
+      ${common_headers}
      )
 
 

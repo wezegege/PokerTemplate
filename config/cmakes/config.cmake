@@ -9,10 +9,6 @@ execute_process(COMMAND git describe --abbrev=4 HEAD
   OUTPUT_VARIABLE VERSION
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-set(separator "--------------------------------------------------")
-message(STATUS ${separator})
-message(STATUS "Configuring ${project_name} ${VERSION}")
-
 # Builders
 
 option(doInstall "Whether to create the install target" OFF)

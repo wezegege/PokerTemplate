@@ -1,12 +1,15 @@
-message(STATUS ${separator})
-message(STATUS "Creating executables")
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_dir})
 
 file(
   GLOB_RECURSE
   common_files
-  ${srccmn_dir}/*
+  ${srccmn_dir}/*.cpp
+  )
+
+file(
+  GLOB_RECURSE
+  common_headers
+  ${srccmn_dir}/*.h
   )
 
 file(
@@ -21,13 +24,21 @@ foreach(binary ${binaries})
   file(
     GLOB_RECURSE
     source_files
-    ${srcbin_dir}/${binary}/*
+    ${srcbin_dir}/${binary}/*.cpp
+    )
+
+  file(
+    GLOB_RECURSE
+    header_files
+    ${srcbin_dir}/${binary}/*.h
     )
 
   add_executable(
     ${binary}
     ${source_files}
+    ${header_files}
     ${common_files}
+    ${common_headers}
     )
 
   include_directories(${srcbin_dir}/${binary})

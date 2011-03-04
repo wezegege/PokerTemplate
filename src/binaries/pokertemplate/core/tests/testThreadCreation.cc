@@ -1,6 +1,6 @@
 /**
  * @author Kevin TRAN
- * @date 02/03/2011
+ * @date 03/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -25,31 +25,30 @@
 
 //- includes
 //-- personnal includes
+
 #include "core/thread.h"
 
 //-- system includes
+
 #include <iostream>
 using std::cout;
 using std::endl;
 #include <cstdlib>
 
-class TestThread : public Thread {
+class DoNothingThread : public Thread {
   public:
     virtual int Run() {
-      cout << "It Works" << endl;
       return 0;
     }
 };
 
-
 /**
  *
  */
-int testThreadCreation(int argc, char** argv) {
-  TestThread thread;
+int main(int argc, char** argv) {
+  DoNothingThread thread;
   thread.Start();
   thread.Join();
-
 
   return EXIT_SUCCESS;
 }

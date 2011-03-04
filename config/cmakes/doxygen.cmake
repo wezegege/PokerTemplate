@@ -1,5 +1,4 @@
-message(STATUS ${separator})
-message(STATUS "Making documentation target")
+
 
 message(STATUS "  Making html documentation : ${doc_html}")
 message(STATUS "  Making latex documentation : ${doc_latex}")
