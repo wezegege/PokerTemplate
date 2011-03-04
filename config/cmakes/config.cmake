@@ -34,7 +34,7 @@ set(build_dir ${project_dir}/build)
 set(config_dir ${project_dir}/config)
 
 set(test_dir ${source_dir}/tests)
-set(testbin_dir ${project_dir}/tests)
+set(testbin_dir ${build_dir}/tests)
 
 set(bin_dir ${project_dir}/bin)
 set(lib_dir ${bin_dir}/libs)
