@@ -1,6 +1,6 @@
 /**
  * @author Kevin TRAN
- * @date 01/03/2011
+ * @date 04/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -30,14 +30,27 @@
 //-- personnal includes
 
 //-- system includes
+#include <boost/any.hpp>
 #include <string>
 #include <map>
-
 //-- forward declarations
-
-//- constants
 static const std::string DEFAULT_CONFIG_FILE = "config.ini"; ///< default name of the config file
 static const std::string DEFAULT_CONFIG_PATH = "."; ///< default path of the configuration file
+
+class Setting {
+  public:
+    template<typename T>
+      void SetValue(T value);
+    template<typename T>
+      T GetValue();
+template<typename T>
+Setting(std::string label, std::string description, std::string shortcut, T value);
+  private:
+    boost::any value_;
+    const std::string label_;
+    const std::string description_;
+    const std::string shortcut_;
+};
 
 /**
 
@@ -48,7 +61,7 @@ class SettingManager {
     //-- typedefs and enums
 
     //-- constants
-    
+
     //-- methods
     /**
      * Read the options passed to the main function, and interpret them to fill the preferences. Has priorities on file based preferences
@@ -87,6 +100,7 @@ class SettingManager {
      */
     template<typename T>
       T GetSetting(std::string settingName);
+
     //-- operator overloads
 
     //-- constructors - destructor
@@ -134,16 +148,14 @@ class SettingManager {
     explicit SettingManager(const SettingManager & aSettingManager);
 
     //-- data members
-    std::map<std::string, std::string> stringData_; ///< map for the string parameters
-    std::map<std::string, int> intData_; ///< map for the integer parameters
-    std::map<std::string, bool> boolData_; ///< map for the boolean parameters
+    std::map<std::string, Setting> data_; ///< dictionnaryfor the parameters
 
 }; // class SettingManager
 
 //- nonmember functions
 
 //- inline and template definitions file include
-//#include "settingManager-inl.h"
+#include "core/settingManager-inl.h"
 
 #endif // POKERTEMPLATE_CORE_SETTINGMANAGER_H_
 

@@ -1,6 +1,6 @@
 /**
 * @author Kevin TRAN
-* @date 01/03/2011
+* @date 04/03/2011
 * @section LICENSE
 *
 * This file is part of Pokertemplate.
