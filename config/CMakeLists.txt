@@ -1,13 +1,12 @@
-set(cmakes ${CMAKE_SOURCE_DIR}/../config/cmakes)
+set(cmakes ${CMAKE_SOURCE_DIR}/../../config/cmakes)
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${cmakes}")
 
 set(separator "--------------------------------------------------")
 message(STATUS ${separator})
-message(STATUS "Configuring ${project_name} ${VERSION}")
+message(STATUS "Configuring")
 
 include(config)
 
-message(STATUS "Making tests target")
 cmake_minimum_required(VERSION ${CMAKE_BACKWARDS_COMPATIBILITY})
 
 project(${project_name})

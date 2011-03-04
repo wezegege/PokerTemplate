@@ -9,6 +9,8 @@ execute_process(COMMAND git describe --abbrev=4 HEAD
   OUTPUT_VARIABLE VERSION
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
+message(STATUS "${project_name} ${VERSION}")
+
 # Builders
 
 option(doInstall "Whether to create the install target" OFF)
@@ -23,14 +25,14 @@ message(STATUS "  Building archive module : ${doArchive}")
 
 # Directories
 
-set(project_dir ${CMAKE_SOURCE_DIR}/..)
+set(project_dir ${CMAKE_SOURCE_DIR}/../..)
 
 set(source_dir ${project_dir}/src)
 set(srcbin_dir ${source_dir}/binaries)
 set(srclib_dir ${source_dir}/libraries)
 set(srccmn_dir ${source_dir}/common)
 
-set(build_dir ${project_dir}/build)
+set(build_dir ${project_dir}/build/${CMAKE_BUILD_TYPE})
 set(config_dir ${project_dir}/config)
 
 set(test_dir ${source_dir}/tests)
