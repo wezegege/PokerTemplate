@@ -20,21 +20,18 @@
 *
 * @section DESCRIPTION
 *
-* implementation of class SettingManager
+* implementation of class Container
 */
 
 //- includes
 //-- personnal includes
 
-#include "core/settingManager.h"
+#include "core/container.h"
 
 //-- system includes
 
+#include <boost/program_options/options_description.hpp>
 using po::options_description;
-using po::positional_options_description;
-using po::store;
-using po::command_line_parser;
-using po::parse_config_file;
 
 //- miscellanous
 
@@ -49,16 +46,37 @@ using po::parse_config_file;
 //-- friend functions
 
 //-- methods
+void Container::InitParameters(int argc, char ** argv) {
+  options_description generic("Generic options");
+  generic.add_options()
+    ("version,v", "print version string")
+    ("help-module", value<string>(),
+             "produce a help for a given module")
+    ("help,h", "produce help message")
+    ;
 
-bool SettingManager::ReadFromParameters(int argc, char ** argv, 
-    const options_description & toCheck, 
-    const positional_options_description & positions) {
-  store(command_line_parser(argc, argv).options(toCheck).positional(positions).run(), variablesMap_);
-}
+  options_description config("Configuration");
+  config.add_options()
 
-bool SettingManager::ReadFromFile(options_description toCheck,
-    const std::string & fileName) {
-  store(parse_config_file(fileName, toCheck), variablesMap_);
+    ;
+
+  options_descriptions hidden("Hidden options");
+  hidden.add_options()
+
+    ;
+
+
+  options_description cmdlineOptions;
+  cmdline_options.add(generic).add(config).add(hidden);
+
+  options_description configFileOptions;
+  configFileOptions.add(config).add(hidden);
+
+  options_description visible("Allowed options");
+  visible.add(generic).add(config);
+
+  settingManager_.ReadFromParameters(argc, argv, cmdlineOptions);
+  settingManager_.ReadFromFile(configFileOptions);
 }
 
 //-- class methods
@@ -70,14 +88,14 @@ bool SettingManager::ReadFromFile(options_description toCheck,
 /**
 
 */
-SettingManager::SettingManager() {
+Container::Container() {
 
 }
 
 /**
 
 */
-SettingManager::~SettingManager() {
+Container::~Container() {
 
 }
 

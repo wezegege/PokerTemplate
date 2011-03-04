@@ -30,28 +30,12 @@
 //-- personnal includes
 
 //-- system includes
-#include <boost/any.hpp>
-#include <string>
-#include <map>
+
 //-- forward declarations
-static const std::string DEFAULT_CONFIG_FILE = "config.ini"; ///< default name of the config file
-static const std::string DEFAULT_CONFIG_PATH = "."; ///< default path of the configuration file
+/// default name of the config file
+static const std::string DEFAULT_CONFIG_FILE = "config.ini"; 
 
-class Setting {
-  public:
-    template<typename T>
-      void SetValue(T value);
-    template<typename T>
-      T GetValue();
-template<typename T>
-Setting(std::string label, std::string description, std::string shortcut, T value);
-  private:
-    boost::any value_;
-    const std::string label_;
-    const std::string description_;
-    const std::string shortcut_;
-};
-
+namespace po = boost::program_options;
 /**
 
 */
@@ -69,7 +53,10 @@ class SettingManager {
      * @param argv the argument values, passed to main function
      * @return whether the operation went well or not
      */
-    bool ReadFromParameters(int argc, char** argv);
+    bool ReadFromParameters(int argc, char** argv, 
+        const po::options_description & toCheck, 
+        const po::positional_options_description & positions
+            = po::positional_options_description);
 
     /**
      * read the options from the speciic configuration file, or from the indicated file. erase the saved information.
@@ -77,13 +64,8 @@ class SettingManager {
      * @param path path of the config file. Defaults to the constant DEFAULT_FILE_PATH
      * @return whether the operation went well or not
      */
-    bool ReadFromFile(const std::string & fileName = DEFAULT_CONFIG_FILE, const std::string & path = DEFAULT_CONFIG_PATH);
-
-    /**
-     *
-     * @return 
-     */        
-    bool CreateDefaultSettings();
+    bool ReadFromFile(const po::options_description & toCheck, 
+        const std::string & fileName = DEFAULT_CONFIG_FILE);
 
     /**
      * manually set a setting
@@ -148,14 +130,14 @@ class SettingManager {
     explicit SettingManager(const SettingManager & aSettingManager);
 
     //-- data members
-    std::map<std::string, Setting> data_; ///< dictionnaryfor the parameters
 
+    po::variables_map variablesMap_:
 }; // class SettingManager
 
 //- nonmember functions
 
 //- inline and template definitions file include
-#include "core/settingManager-inl.h"
+//#include "core/settingManager-inl.h"
 
 #endif // POKERTEMPLATE_CORE_SETTINGMANAGER_H_
 

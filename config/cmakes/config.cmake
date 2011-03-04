@@ -27,7 +27,6 @@ message(STATUS "  Building archive module : ${doArchive}")
 
 # Directories
 
-set(project_dir ${CMAKE_SOURCE_DIR}/..)
 
 set(source_dir ${project_dir}/src)
 set(srcbin_dir ${source_dir}/binaries)
