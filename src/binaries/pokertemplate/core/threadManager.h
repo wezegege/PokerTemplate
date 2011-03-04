@@ -45,6 +45,8 @@ class NoThreadException {};
 
     class WrongThreadException {};
 
+    class UniqueThreadException {};
+
     //-- constants
 
     //-- methods

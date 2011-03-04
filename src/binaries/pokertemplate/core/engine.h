@@ -50,13 +50,13 @@ class Engine : public ThreadManager {
      *
      * @param thread
      */
-    virtual void Create(Thread::Ptr thread) throw(WrongThreadException);
+    virtual void Create(Thread::Ptr thread) throw(WrongThreadException, UniqueThreadException);
 
     /**
      *
      * @param 
      */
-    virtual void Join(int) throw(NoThreadException);
+    virtual void Join(int=0) throw(NoThreadException);
 
     /**
      *

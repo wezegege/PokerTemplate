@@ -44,9 +44,13 @@
 
 //-- methods
 
-void Engine::Create(Thread::Ptr thread) throw(WrongThreadException) {
+void Engine::Create(Thread::Ptr thread) 
+  throw(WrongThreadException, UniqueThreadException) {
   if(thread == 0) {
     throw WrongThreadException();
+  }
+  if(thread_ != 0) {
+    throw UniqueThreadException();
   }
   thread->Start();
   thread_ = thread;

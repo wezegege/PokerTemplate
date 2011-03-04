@@ -60,7 +60,7 @@ class Module : public ThreadManager {
      *
      * @param index
      */
-    virtual void Join(int index);
+    virtual void Join(int index); 
 
     /**
      *
