@@ -2,14 +2,16 @@
 
 set(project_name pokertemplate)
 
-set(CMAKE_BUILD_TYPE Debug)
+if(NOT DEFINED CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Debug)
+endif(NOT DEFINED CMAKE_BUILD_TYPE)
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.8)
 
 execute_process(COMMAND git describe --abbrev=4 HEAD
   OUTPUT_VARIABLE VERSION
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-message(STATUS "${project_name} ${VERSION}")
+message(STATUS "${project_name} ${VERSION} ${CMAKE_BUILD_TYPE}")
 
 # Builders
 
@@ -25,7 +27,7 @@ message(STATUS "  Building archive module : ${doArchive}")
 
 # Directories
 
-set(project_dir ${CMAKE_SOURCE_DIR}/../..)
+set(project_dir ${CMAKE_SOURCE_DIR}/..)
 
 set(source_dir ${project_dir}/src)
 set(srcbin_dir ${source_dir}/binaries)

@@ -1,4 +1,4 @@
-set(cmakes ${CMAKE_SOURCE_DIR}/../../config/cmakes)
+set(cmakes ${CMAKE_SOURCE_DIR}/../config/cmakes)
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${cmakes}")
 
 set(separator "--------------------------------------------------")
