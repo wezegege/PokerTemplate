@@ -46,7 +46,7 @@ using std::vector;
 
 //-- methods
 
-void Module::Create(Thread::Ptr thread) throw(WrongThreadException) {
+void Module::Create(Thread::Ptr thread) throw(WrongThreadException, UniqueThreadException) {
  if(thread == 0) {
   throw WrongThreadException();
  }
@@ -54,12 +54,12 @@ void Module::Create(Thread::Ptr thread) throw(WrongThreadException) {
  threads_.push_back(thread);
 }
 
-void Module::Join(int index) {
+void Module::Join(int index) throw(NoThreadException) {
   threads_.at(index)->Join();
 }
 
 
-void Module::Destroy() {
+void Module::Destroy() throw(NoThreadException) {
   vector<Thread::Ptr>::iterator it = threads_.begin();
   for(; it < threads_.end(); ++it) {
     (*it)->Cancel();

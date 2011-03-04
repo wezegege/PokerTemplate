@@ -54,18 +54,18 @@ class Module : public ThreadManager {
      *
      * @param thread
      */
-    virtual void Create(Thread::Ptr thread) throw (WrongThreadException);
+    virtual void Create(Thread::Ptr thread) throw (WrongThreadException, UniqueThreadException);
 
     /**
      *
      * @param index
      */
-    virtual void Join(int index); 
+    virtual void Join(int index) throw(NoThreadException); 
 
     /**
      *
      */
-    virtual void Destroy();
+    virtual void Destroy() throw(NoThreadException);
 
     //-- operator overloads
 

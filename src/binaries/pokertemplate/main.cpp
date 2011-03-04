@@ -29,14 +29,31 @@
 //-- system includes
 #include <iostream>
 using std::cout;
+using std::cerr;
 using std::endl;
 #include <cstdlib>
+#include <exception>
+
+void ending();
+void unexpect();
 
 /**
  *
  */
 int main(int argc, char** argv) {
+  std::set_terminate(ending);
+  std::set_unexpected(unexpect);
   cout << "Hello World !" << endl;
 
   return EXIT_SUCCESS;
 }
+
+void ending() {
+  cerr << "Unhandled exception" << endl;
+  exit(EXIT_FAILURE);
+}
+
+void unexpect() {
+  cerr << "Unexpected exception" << endl;
+  std::terminate();
+};

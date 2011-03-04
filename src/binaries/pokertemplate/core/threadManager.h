@@ -32,6 +32,8 @@
 
 //-- system includes
 
+#include <exception>
+
 //-- forward declarations
 
 /**
@@ -41,11 +43,20 @@ class ThreadManager {
   //- public
   public:
     //-- typedefs and enums
-class NoThreadException {};
+    class NoThreadException : public std::exception {
+      public:
+        virtual const char * what() const throw();
+    };
 
-    class WrongThreadException {};
+    class WrongThreadException : public std::exception {
+      public:
+        virtual const char * what() const throw();
+    };
 
-    class UniqueThreadException {};
+    class UniqueThreadException : public std::exception {
+      public:
+        virtual const char * what() const throw();
+    };
 
     //-- constants
 
@@ -54,18 +65,18 @@ class NoThreadException {};
      *
      * @param thread
      */
-    virtual void Create(Thread::Ptr thread) = 0;
+    virtual void Create(Thread::Ptr thread) throw(WrongThreadException, UniqueThreadException) = 0;
 
     /**
      *
      * @param index
      */
-    virtual void Join(int index) = 0;
+    virtual void Join(int index) throw(NoThreadException) = 0;
 
     /**
      *
      */
-    virtual void Destroy() = 0;
+    virtual void Destroy() throw(NoThreadException) = 0;
 
     //-- operator overloads
 

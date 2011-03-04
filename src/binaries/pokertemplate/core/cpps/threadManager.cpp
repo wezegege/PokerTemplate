@@ -44,6 +44,18 @@
 
 //-- methods
 
+const char * ThreadManager::NoThreadException::what() const throw() {
+  return "The thread manager contains no thread to operate with.";
+}
+
+const char * ThreadManager::WrongThreadException::what() const throw() {
+  return "The thread passed in parameter is empty.";
+}
+
+const char * ThreadManager::UniqueThreadException::what() const throw() {
+  return "The threadManager can not contain more than one thread.";
+}
+
 //-- class methods
 
 //-- operator overloads
