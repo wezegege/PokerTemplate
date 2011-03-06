@@ -1,6 +1,6 @@
 /**
  * @author Kevin TRAN
- * @date 04/03/2011
+ * @date 06/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -20,57 +20,65 @@
  *
  * @section DESCRIPTION
  *
- * Header for class Container
+ * Header for class ThreadDescriptor
  */
 
-#ifndef POKERTEMPLATE_CORE_CONTAINER_H_
-#define POKERTEMPLATE_CORE_CONTAINER_H_
+#ifndef POKERTEMPLATE_CORE_THREADDESCRIPTOR_H_
+#define POKERTEMPLATE_CORE_THREADDESCRIPTOR_H_
 
 //- includes
 //-- personnal includes
 
-#include "core/settingManager.h"
-#include "core/threadDescriptor.h"
-
 //-- system includes
 
+#include <vector>
+#include <string>
+#include <boost/shared_ptr.hpp>
+
 //-- forward declarations
+
+class ThreadManager;
+namespace boost {
+  namespace program_options {
+    class options_description;
+  }
+}
 
 /**
 
 */
-class Container {
+class ThreadDescriptor {
   //- public
   public:
     //-- typedefs and enums
-
-    enum Units{GUI, NETWORK, CONSOLE, SERVER};
-
-    
+typedef std::vector<ThreadDescriptor> Vector;
     //-- constants
 
-    //-- method
+    //-- methods
 
     /**
      *
+     * @return
      */
-    void InitDescriptors();
+    virtual boost::shared_ptr<ThreadManager> GetManager() const;
 
     /**
      *
+     * @return
      */
-    void InitParameters(int argc, char ** argv, std::string fileName);
+    virtual boost::program_options::options_description GetOptions() const;
 
     /**
      *
+     * @return
      */
-    void InitResources();
+    virtual boost::program_options::options_description GetHiddenOptions() const;
 
-    /**
-     *
-     */
-    void InitThreads();
-
+/**
+ *
+ * @return 
+ */
+    const std::string & GetName() const;
 
     //-- operator overloads
 
@@ -78,13 +86,13 @@ class Container {
     /**
      * default constructor
      */
-    Container();
+    ThreadDescriptor();
 
     /*
 
      * Destructor
      */
-    virtual ~Container();
+    virtual ~ThreadDescriptor();
 
 
     //- protected
@@ -94,6 +102,18 @@ class Container {
     //-- constants
 
     //-- methods
+
+    /**
+     *
+     * @return
+     */
+    boost::shared_ptr<ThreadManager> GetModule() const;
+
+    /**
+     *
+     * @return
+     */
+    boost::shared_ptr<ThreadManager> GetEngine() const;
 
     //-- data members
 
@@ -107,28 +127,27 @@ class Container {
 
     /**
      * assignment operator overload
-     * @param aContainer the value of the assignment
+     * @param aThreadDescriptor the value of the assignment
      * @return a reference to itself
      */
-    Container & operator=(const Container & aContainer);
+    ThreadDescriptor & operator=(const ThreadDescriptor & aThreadDescriptor);
 
     /**
      * copy constructor
-     * @param aContainer the value of the assignment
+     * @param aThreadDescriptor the value of the assignment
      */
-    explicit Container(const Container & aContainer);
+    explicit ThreadDescriptor(const ThreadDescriptor & aThreadDescriptor);
 
     //-- data members
 
-    SettingManager settingManager_;
-    ThreadDescriptor::Vector descriptors_;
+  const std::string name_;
 
-}; // class Container
+}; // class ThreadDescriptor
 
 //- nonmember functions
 
 //- inline and template definitions file include
-//#include "container-inl.h"
+//#include "core/threadDescriptor-inl.h"
 
-#endif // POKERTEMPLATE_CORE_CONTAINER_H_
+#endif // POKERTEMPLATE_CORE_THREADDESCRIPTOR_H_
 

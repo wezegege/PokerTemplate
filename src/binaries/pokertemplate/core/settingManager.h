@@ -28,14 +28,23 @@
 
 //- includes
 //-- personnal includes
-
+#include "core/threadDescriptor.h"
 //-- system includes
+
+#include <boost/program_options/variables_map.hpp> 
 
 //-- forward declarations
 /// default name of the config file
-static const std::string DEFAULT_CONFIG_FILE = "config.ini"; 
 
-namespace po = boost::program_options;
+namespace boost {
+  namespace program_options {
+    class options_description;
+  }
+}
+
+namespace po = boost::program_options; 
+
+
 /**
 
 */
@@ -54,9 +63,7 @@ class SettingManager {
      * @return whether the operation went well or not
      */
     bool ReadFromParameters(int argc, char** argv, 
-        const po::options_description & toCheck, 
-        const po::positional_options_description & positions
-            = po::positional_options_description);
+        const ThreadDescriptor::Vector & descriptors); 
 
     /**
      * read the options from the speciic configuration file, or from the indicated file. erase the saved information.
@@ -64,8 +71,8 @@ class SettingManager {
      * @param path path of the config file. Defaults to the constant DEFAULT_FILE_PATH
      * @return whether the operation went well or not
      */
-    bool ReadFromFile(const po::options_description & toCheck, 
-        const std::string & fileName = DEFAULT_CONFIG_FILE);
+    bool ReadFromFile(const ThreadDescriptor::Vector & descriptors, 
+        const std::string & fileName);
 
     /**
      * manually set a setting
@@ -81,7 +88,7 @@ class SettingManager {
      * @return the setting value
      */
     template<typename T>
-      T GetSetting(std::string settingName);
+      T GetSetting(std::string settingName) const;
 
     //-- operator overloads
 
@@ -116,6 +123,8 @@ class SettingManager {
 
     //-- methods
 
+    void ListOptions(const ThreadDescriptor::Vector & descs, po::options_description & options);
+
     /**
      * assignment operator overload
      * @param aSettingManager the value of the assignment
@@ -131,7 +140,7 @@ class SettingManager {
 
     //-- data members
 
-    po::variables_map variablesMap_:
+    po::variables_map variablesMap_;
 }; // class SettingManager
 
 //- nonmember functions

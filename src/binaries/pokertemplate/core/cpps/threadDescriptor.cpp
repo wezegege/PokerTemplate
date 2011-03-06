@@ -1,6 +1,6 @@
 /**
 * @author Kevin TRAN
-* @date 04/03/2011
+* @date 06/03/2011
 * @section LICENSE
 *
 * This file is part of Pokertemplate.
@@ -20,21 +20,23 @@
 *
 * @section DESCRIPTION
 *
-* implementation of class Container
+* implementation of class ThreadDescriptor
 */
 
 //- includes
 //-- personnal includes
 
-#include "core/container.h"
+#include "core/threadDescriptor.h"
+
+#include "core/module.h"
+#include "core/engine.h"
 
 //-- system includes
 
-#include <string>
-using std::string;
+using boost::shared_ptr;
 #include <boost/program_options/options_description.hpp>
-using po::options_description;
-using po::value;
+using boost::program_options::options_description;
+using std::string;
 
 //- miscellanous
 
@@ -49,17 +51,21 @@ using po::value;
 //-- friend functions
 
 //-- methods
-
-void Container::InitDescriptors() {
-
+shared_ptr<ThreadManager> ThreadDescriptor::GetManager() const {
+  return GetEngine();
 }
 
-void Container::InitParameters(int argc, char ** argv, string fileName) {
- 
-  settingManager_.ReadFromParameters(argc, argv, descriptors_);
-  settingManager_.ReadFromFile(descriptors_, fileName);
+options_description ThreadDescriptor::GetOptions() const {
+    return options_description();
 }
 
+options_description ThreadDescriptor::GetHiddenOptions() const {
+    return options_description();
+}
+
+const string & ThreadDescriptor::GetName() const {
+  return name_;
+}
 //-- class methods
 
 //-- operator overloads
@@ -69,20 +75,28 @@ void Container::InitParameters(int argc, char ** argv, string fileName) {
 /**
 
 */
-Container::Container() : settingManager_(), descriptors_() {
+ThreadDescriptor::ThreadDescriptor() {
 
 }
 
 /**
 
 */
-Container::~Container() {
+ThreadDescriptor::~ThreadDescriptor() {
 
 }
 
 //- protected
 
 //-- methods
+
+shared_ptr<ThreadManager> ThreadDescriptor::GetModule() const {
+  return shared_ptr<ThreadManager>(new Module());
+}
+
+shared_ptr<ThreadManager> ThreadDescriptor::GetEngine() const {
+  return shared_ptr<ThreadManager>(new Engine());
+}
 
 //- private
 

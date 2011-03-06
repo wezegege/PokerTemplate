@@ -53,7 +53,7 @@ set(doxyfile_out ${build_dir}/Doxyfile)
 
 set(include_dirs ${srccmn_dir} /usr/include)
 set(lib_dirs /usr/lib)
-set(link_libraries pthread)
+set(link_libraries pthread boost_program_options boost_filesystem)
 
 #documentation
 
