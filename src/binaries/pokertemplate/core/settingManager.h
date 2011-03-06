@@ -32,15 +32,10 @@
 //-- system includes
 
 #include <boost/program_options/variables_map.hpp> 
+#include <boost/program_options/options_description.hpp> 
 
 //-- forward declarations
 /// default name of the config file
-
-namespace boost {
-  namespace program_options {
-    class options_description;
-  }
-}
 
 namespace po = boost::program_options; 
 
@@ -53,9 +48,27 @@ class SettingManager {
   public:
     //-- typedefs and enums
 
+    class OptionsDescription {
+      public:
+        OptionsDescription(boost::shared_ptr<po::options_description> desc) 
+          :desc_(desc) {}
+        template<typename T>
+        OptionsDescription & operator() (std::string name, std::string description, T defaultValue = T()) {
+          desc_->add_options()
+            (name, po::value<T>(), description);
+          return *this;
+        }
+      private:
+        boost::shared_ptr<po::options_description> desc_;
+    };
     //-- constants
 
     //-- methods
+    
+    /**
+     *
+     */
+    OptionsDescription CreateDescription(std::string name);
     /**
      * Read the options passed to the main function, and interpret them to fill the preferences. Has priorities on file based preferences
      * @param argc the argument count, passed to main function
@@ -90,6 +103,8 @@ class SettingManager {
     template<typename T>
       T GetSetting(std::string settingName) const;
 
+    void ListOptions(const ThreadDescriptor::Vector & descs);
+   
     //-- operator overloads
 
     //-- constructors - destructor
@@ -123,7 +138,7 @@ class SettingManager {
 
     //-- methods
 
-    void ListOptions(const ThreadDescriptor::Vector & descs, po::options_description & options);
+   
 
     /**
      * assignment operator overload
@@ -140,6 +155,7 @@ class SettingManager {
 
     //-- data members
 
+    po::options_description descriptions_;
     po::variables_map variablesMap_;
 }; // class SettingManager
 

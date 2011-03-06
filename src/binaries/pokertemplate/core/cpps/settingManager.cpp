@@ -41,6 +41,8 @@ using po::parse_config_file;
 #include <boost/filesystem/fstream.hpp>
 using boost::filesystem::fstream;
 using boost::filesystem::path;
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 #include <string>
 using std::string;
 
@@ -57,6 +59,11 @@ using std::string;
 //-- friend functions
 
 //-- methods
+SettingManager::OptionsDescription SettingManager::CreateDescription(string name) {
+ shared_ptr<options_description> description(new options_description(name));
+ descriptions_.add(*description);
+ return OptionsDescription(description);
+}
 
 bool SettingManager::ReadFromParameters(int argc, char ** argv, 
     const ThreadDescriptor::Vector & descriptors) {
@@ -70,8 +77,7 @@ bool SettingManager::ReadFromParameters(int argc, char ** argv,
 
   options_description options;
   options.add(generic);
-  ListOptions(descriptors, options);
-
+  options.add(descriptions_);
   store(command_line_parser(argc, argv).options(options).run(), variablesMap_);
 }
 
@@ -79,7 +85,7 @@ bool SettingManager::ReadFromFile(const ThreadDescriptor::Vector & descriptors,
     const std::string & fileName) {
 
   options_description options;
-  ListOptions(descriptors, options);
+  options.add(descriptions_);
 
   path file(fileName);
   fstream fileHandle;
@@ -87,6 +93,9 @@ bool SettingManager::ReadFromFile(const ThreadDescriptor::Vector & descriptors,
   store(parse_config_file(fileHandle, options), variablesMap_);
 }
 
+void SettingManager::ListOptions(const ThreadDescriptor::Vector & descs) {
+
+}
 //-- class methods
 
 //-- operator overloads
@@ -115,9 +124,4 @@ SettingManager::~SettingManager() {
 
 //-- methods
 
-void SettingManager::ListOptions(const ThreadDescriptor::Vector & descs, options_description & options) {
-  ThreadDescriptor::Vector::const_iterator it = descs.begin();
-  for(;it != descs.end(); ++it) {
-    options.add(it->GetOptions());
-  }
-}
+

@@ -34,8 +34,6 @@
 //-- system includes
 
 using boost::shared_ptr;
-#include <boost/program_options/options_description.hpp>
-using boost::program_options::options_description;
 using std::string;
 
 //- miscellanous
@@ -55,12 +53,10 @@ shared_ptr<ThreadManager> ThreadDescriptor::GetManager() const {
   return GetEngine();
 }
 
-options_description ThreadDescriptor::GetOptions() const {
-    return options_description();
+void ThreadDescriptor::GetOptions(SettingManager & settingManager) const {
 }
 
-options_description ThreadDescriptor::GetHiddenOptions() const {
-    return options_description();
+void ThreadDescriptor::GetHiddenOptions(SettingManager & settingManager) const {
 }
 
 const string & ThreadDescriptor::GetName() const {

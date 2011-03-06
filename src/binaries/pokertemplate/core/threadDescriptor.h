@@ -38,11 +38,7 @@
 //-- forward declarations
 
 class ThreadManager;
-namespace boost {
-  namespace program_options {
-    class options_description;
-  }
-}
+class SettingManager;
 
 /**
 
@@ -66,13 +62,13 @@ typedef std::vector<ThreadDescriptor> Vector;
      *
      * @return
      */
-    virtual boost::program_options::options_description GetOptions() const;
+    virtual void GetOptions(SettingManager & settingManager) const;
 
     /**
      *
      * @return
      */
-    virtual boost::program_options::options_description GetHiddenOptions() const;
+    virtual void GetHiddenOptions(SettingManager & settingManager) const;
 
 /**
  *
