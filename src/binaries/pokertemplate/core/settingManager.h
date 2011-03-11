@@ -50,9 +50,7 @@ class SettingManager {
 
     class OptionsDescription {
       public:
-        OptionsDescription(boost::shared_ptr<po::options_description> desc) 
-          :desc_(desc) {}
-        template<typename T>
+        OptionsDescription(boost::shared_ptr<po::options_description> desc);        template<typename T>
         OptionsDescription & operator() (std::string name, std::string description, T defaultValue = T()) {
           desc_->add_options()
             (name, po::value<T>(), description);

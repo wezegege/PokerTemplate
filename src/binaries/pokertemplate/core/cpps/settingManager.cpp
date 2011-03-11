@@ -102,6 +102,10 @@ void SettingManager::ListOptions(const ThreadDescriptor::Vector & descs) {
 
 //-- constructors - destructor
 
+SettingManager::OptionsDescription::OptionsDescription(shared_ptr<options_description>) : desc_() {
+
+}
+
 /**
 
 */
