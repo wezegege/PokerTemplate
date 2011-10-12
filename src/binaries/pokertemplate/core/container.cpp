@@ -55,7 +55,6 @@ void Container::InitDescriptors() {
 }
 
 void Container::InitParameters(int argc, char ** argv, string fileName) {
- 
   settingManager_.ReadFromParameters(argc, argv, descriptors_);
   settingManager_.ReadFromFile(descriptors_, fileName);
 }

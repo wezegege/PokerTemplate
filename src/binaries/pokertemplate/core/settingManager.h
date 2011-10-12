@@ -31,13 +31,13 @@
 #include "core/threadDescriptor.h"
 //-- system includes
 
-#include <boost/program_options/variables_map.hpp> 
-#include <boost/program_options/options_description.hpp> 
+#include <boost/program_options/variables_map.hpp>
+#include <boost/program_options/options_description.hpp>
 
 //-- forward declarations
 /// default name of the config file
 
-namespace po = boost::program_options; 
+namespace po = boost::program_options;
 
 
 /**
@@ -62,7 +62,7 @@ class SettingManager {
     //-- constants
 
     //-- methods
-    
+
     /**
      *
      */
@@ -73,8 +73,8 @@ class SettingManager {
      * @param argv the argument values, passed to main function
      * @return whether the operation went well or not
      */
-    bool ReadFromParameters(int argc, char** argv, 
-        const ThreadDescriptor::Vector & descriptors); 
+    bool ReadFromParameters(int argc, char** argv,
+        const ThreadDescriptor::Vector & descriptors);
 
     /**
      * read the options from the speciic configuration file, or from the indicated file. erase the saved information.
@@ -82,7 +82,7 @@ class SettingManager {
      * @param path path of the config file. Defaults to the constant DEFAULT_FILE_PATH
      * @return whether the operation went well or not
      */
-    bool ReadFromFile(const ThreadDescriptor::Vector & descriptors, 
+    bool ReadFromFile(const ThreadDescriptor::Vector & descriptors,
         const std::string & fileName);
 
     /**
@@ -102,7 +102,7 @@ class SettingManager {
       T GetSetting(std::string settingName) const;
 
     void ListOptions(const ThreadDescriptor::Vector & descs);
-   
+
     //-- operator overloads
 
     //-- constructors - destructor
@@ -136,7 +136,7 @@ class SettingManager {
 
     //-- methods
 
-   
+
 
     /**
      * assignment operator overload

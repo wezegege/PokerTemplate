@@ -1,6 +1,4 @@
 /**
-* @author Kevin TRAN
-* @date 01/03/2011
 * @section LICENSE
 *
 * This file is part of Pokertemplate.
@@ -17,59 +15,12 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
-*
-* @section DESCRIPTION
-*
-* implementation of class MessageBox
 */
 
-//- includes
-//-- personnal includes
-
-#include "message/messageBox.h"
-
-//-- system includes
-
-//- miscellanous
-
-//-- constants
-
-//-- types
-
-//-- class members
-
-//- public
-
-//-- friend functions
-
-//-- methods
-
-//-- class methods
-
-//-- operator overloads
-
-//-- constructors - destructor
-
-/**
-
-*/
-MessageBox::MessageBox() {
-  pthread_mutex_init(& readMutex_, 0);
-}
-
-/**
-
-*/
-MessageBox::~MessageBox() {
+#include "message/message.h"
+Message::Message() {
 
 }
+Message::~Message() {
 
-//- protected
-
-//-- methods
-
-//- private
-
-//-- methods
-
-
+}

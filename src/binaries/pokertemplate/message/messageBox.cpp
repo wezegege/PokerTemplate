@@ -17,17 +17,12 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef POKERTEMPLATE_MESSAGE_MESSAGE_H_
-#define POKERTEMPLATE_MESSAGE_MESSAGE_H_
+#include "message/messageBox.h"
 
-class Message {
+MessageBox::MessageBox() {
+  pthread_mutex_init(& readMutex_, 0);
+}
 
-  public:
+MessageBox::~MessageBox() {
 
-    Message();
-    virtual ~Message();
-
-}; // class Message
-
-#endif // POKERTEMPLATE_MESSAGE_MESSAGE_H_
-
+}

@@ -1,6 +1,4 @@
 /**
- * @author Kevin TRAN
- * @date 01/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -18,15 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @section DESCRIPTION
- *
- * exe entry for binary pokertemplate
  */
 
-//- includes
-//-- personnal includes
-
-//-- system includes
 #include <iostream>
 using std::cout;
 using std::cerr;
@@ -37,9 +28,6 @@ using std::endl;
 void ending();
 void unexpect();
 
-/**
- *
- */
 int main(int argc, char** argv) {
   std::set_terminate(ending);
   std::set_unexpected(unexpect);

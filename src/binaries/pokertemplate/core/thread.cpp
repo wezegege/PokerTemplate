@@ -1,6 +1,4 @@
 /**
-* @author Kevin TRAN
-* @date 01/03/2011
 * @section LICENSE
 *
 * This file is part of Pokertemplate.
@@ -17,59 +15,30 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
-*
-* @section DESCRIPTION
-*
-* implementation of class Message
 */
 
-//- includes
-//-- personnal includes
+#include "core/thread.h"
 
-#include "message/message.h"
-
-//-- system includes
-
-//- miscellanous
-
-//-- constants
-
-//-- types
-
-//-- class members
-
-//- public
-
-//-- friend functions
-
-//-- methods
-
-//-- class methods
-
-//-- operator overloads
-
-//-- constructors - destructor
-
-/**
-
-*/
-Message::Message() {
-
+int Thread::Start() {
+  return pthread_create(& threadId_, 0, Thread::EntryPoint, this);
 }
 
-/**
-
-*/
-Message::~Message() {
-
+int Thread::Cancel() {
+  return pthread_cancel(threadId_);
 }
 
-//- protected
+int Thread::Join() {
+  return pthread_join(threadId_, 0);
+}
 
-//-- methods
+Thread::Thread() {
+}
 
-//- private
+Thread::~Thread() {
+}
 
-//-- methods
-
-
+void * Thread::EntryPoint(void * pthis) {
+  Thread * thread = reinterpret_cast<Thread *>(pthis);
+  thread->Run();
+  return 0;
+}

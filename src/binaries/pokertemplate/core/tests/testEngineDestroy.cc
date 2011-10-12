@@ -1,6 +1,4 @@
 /**
-* @author Kevin TRAN
-* @date 03/03/2011
 * @section LICENSE
 *
 * This file is part of Pokertemplate.
@@ -17,10 +15,6 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
-*
-* @section DESCRIPTION
-*
-* Main entry.
 */
 
 //- includes

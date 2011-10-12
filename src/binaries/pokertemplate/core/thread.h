@@ -1,6 +1,4 @@
 /**
- * @author Kevin TRAN
- * @date 01/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -17,37 +15,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @section DESCRIPTION
- *
- * Header for class Thread
  */
+
+#pragma once
 
 #ifndef POKERTEMPLATE_CORE_THREAD_H_
 #define POKERTEMPLATE_CORE_THREAD_H_
 
-//- includes
-//-- personnal includes
-
-//-- system includes
 #include <boost/shared_ptr.hpp>
 #include <pthread.h>
 
-//-- forward declarations
-
-/**
-
-*/
 class Thread {
-  //- public
   public:
-    //-- typedefs and enums
-    /// pointer to a thread
-    typedef boost::shared_ptr<Thread> Ptr;
 
-    //-- constants
+    typedef boost::shared_ptr<Thread> Ptr;  ///< pointer to a thread
 
-    //-- methods
+    Thread();
+    virtual ~Thread();
 
     /**
      * Provides the means to create the thread and start it going.
@@ -65,28 +49,7 @@ class Thread {
      */
     int Join();
 
-    //-- operator overloads
-
-    //-- constructors - destructor
-    /**
-     * default constructor
-     */
-    Thread();
-
-    /*
-
-     * Destructor
-     */
-    virtual ~Thread();
-
-
-    //- protected
   protected:
-    //-- typedefs and enums
-
-    //-- constants
-
-    //-- methods
 
     /**
      *
@@ -101,40 +64,10 @@ class Thread {
      */
     static void * EntryPoint(void * pthis);
 
-
-    //-- data members
-
-    //- private
   private:
-    //-- typedefs and enums
 
-    //-- constants
+    pthread_t threadId_;  ///< Id of the thread if created
+};
 
-    //-- methods
-
-    /**
-     * assignment operator overload
-     * @param aThread the value of the assignment
-     * @return a reference to itself
-     */
-    Thread & operator=(const Thread & aThread);
-
-    /**
-     * copy constructor
-     * @param aThread the value of the assignment
-     */
-    explicit Thread(const Thread & aThread);
-
-    //-- data members
-
-    pthread_t threadId_; ///< Id of the thread if created
-
-}; // class Thread
-
-//- nonmember functions
-
-//- inline and template definitions file include
-//#include "thread-inl.h"
-
-#endif // POKERTEMPLATE_CORE_THREAD_H_
+#endif  // POKERTEMPLATE_CORE_THREAD_H_
 
