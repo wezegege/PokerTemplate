@@ -19,10 +19,6 @@ message(STATUS ${separator})
 message(STATUS "Creating executables")
 include(binaries)
 
-message(STATUS ${separator})
-message(STATUS "Creating libraries")
-include(libraries)
-
 if(${doDocumentation})
   message(STATUS ${separator})
   message(STATUS "Making documentation target")

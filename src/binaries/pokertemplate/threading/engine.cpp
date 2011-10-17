@@ -15,14 +15,31 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#include "message/messageBox.h"
+#include "threading/engine.h"
+using boost::shared_ptr;
+using boost::thread;
 
-MessageBox::MessageBox() {
-  pthread_mutex_init(& readMutex_, 0);
+void Engine::Initialize() {}
+
+void Engine::Execute() {}
+
+void Engine::Launch() {
+  thread_ = shared_ptr<thread>(new thread(Engine::StartThread, this));
 }
 
-MessageBox::~MessageBox() {
-
+void Engine::StartThread(Engine * engine) {
+  engine->Execute();
 }
+
+void Engine::Finalize() {
+  thread_->join();
+}
+
+void Engine::operator()() {
+  Execute();
+}
+
+Engine::Engine(EngineManager & engineManager) : engineManager_(engineManager) {}

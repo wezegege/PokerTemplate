@@ -2,9 +2,9 @@
 
 set(project_name pokertemplate)
 
-if(NOT DEFINED CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Debug)
-endif(NOT DEFINED CMAKE_BUILD_TYPE)
+# if(NOT DEFINED CMAKE_BUILD_TYPE)
+set(CMAKE_BUILD_TYPE Debug)
+# endif(NOT DEFINED CMAKE_BUILD_TYPE)
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.8)
 
 execute_process(COMMAND git describe --abbrev=4 HEAD
@@ -53,7 +53,7 @@ set(doxyfile_out ${build_dir}/Doxyfile)
 
 set(include_dirs ${srccmn_dir} /usr/include)
 set(lib_dirs /usr/lib)
-set(link_libraries pthread boost_program_options boost_filesystem)
+set(link_libraries )
 
 #documentation
 

@@ -1,6 +1,4 @@
 /**
- * @author Kevin TRAN
- * @date 03/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -18,38 +16,29 @@
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @section DESCRIPTION
- *
- * Main entry.
  */
-
-//- includes
-//-- personnal includes
-
-#include "core/thread.h"
-
-//-- system includes
-
 #include <iostream>
 using std::cout;
 using std::endl;
-#include <cstdlib>
+#include <time.h>
+#include "threading/engineManager.h"
+#include "threading/engine.h"
+using boost::shared_ptr;
 
-class DoNothingThread : public Thread {
+class TestEngine : public Engine {
   public:
-    virtual int Run() {
-      return 0;
+    void Initialize() {}
+    void Execute() {
+      cout << "coucou" << endl;
     }
+    TestEngine(EngineManager  & em) : Engine(em) {}
 };
 
-/**
- *
- */
-int main(int argc, char** argv) {
-  DoNothingThread thread;
-  thread.Start();
-  thread.Join();
-
-  return EXIT_SUCCESS;
+int main() {
+  EngineManager engineManager;
+  engineManager.Initialize();
+  shared_ptr<TestEngine> engine(new TestEngine(engineManager));
+  engineManager.AddEngine(EngineManager::SERVER, engine);
+  sleep(1);
+  engineManager.Finish();
 }
-

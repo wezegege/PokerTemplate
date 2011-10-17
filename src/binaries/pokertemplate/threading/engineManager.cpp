@@ -1,6 +1,4 @@
 /**
- * @author Kevin TRAN
- * @date 03/03/2011
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -18,39 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @section DESCRIPTION
- *
- * Main entry.
  */
 
-//- includes
-//-- personnal includes
+#include <boost/shared_ptr.hpp>
 
-#include "core/thread.h"
+#include "threading/engineManager.h"
 
-//-- system includes
-
-#include <iostream>
-using std::cout;
-using std::endl;
-#include <cstdlib>
-
-class NeverEndingThread : public Thread {
-  public:
-    int Run() {
-      for(;;);
-      return 0;
-    }
-};
-
-/**
- *
- */
-int main(int argc, char** argv) {
-  NeverEndingThread thread;
-  thread.Start();
-  thread.Cancel();
-
-  return EXIT_SUCCESS;
+void EngineManager::Initialize() {
+  for(int i = 0; i < 4; ++i) {
+    engines_.push_back(EngineStreet());
+  }
 }
 
+int EngineManager::AddEngine(Type type, boost::shared_ptr<Engine> engine) {
+  engine->Launch();
+  int engineId = engines_.at(type).size();
+  engines_.at(type).push_back(engine);
+  return engineId;
+}
+
+void EngineManager::Finish() {
+  for(EngineCity::iterator cityIt = engines_.begin();
+      cityIt != engines_.end(); ++cityIt) {
+    for(EngineStreet::iterator streetIt = cityIt->begin();
+        streetIt != cityIt->end(); ++streetIt) {
+      (*streetIt)->Finalize();
+    }
+  }
+}

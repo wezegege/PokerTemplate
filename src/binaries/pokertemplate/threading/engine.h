@@ -15,19 +15,33 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
+#pragma once
+#ifndef POKERTEMPLATE_THREADING_ENGINE_H_
+#define POKERTEMPLATE_THREADING_ENGINE_H_
 
-#ifndef POKERTEMPLATE_MESSAGE_MESSAGE_H_
-#define POKERTEMPLATE_MESSAGE_MESSAGE_H_
+#include <boost/shared_ptr.hpp>
+#include <boost/thread.hpp>
 
-class Message {
+class EngineManager;
+class Message;
 
+class Engine {
   public:
+    virtual void Initialize();
+    virtual void Execute();
+    virtual void Finalize();
+    void Launch();
+    void operator()();
+    void Receive(Message & message);
 
-    Message();
-    virtual ~Message();
+    Engine(EngineManager & engineManager);
+  private:
+    static void StartThread(Engine * engine);
+    EngineManager & engineManager_;
+    boost::shared_ptr<boost::thread> thread_;
 
-}; // class Message
+};
 
-#endif // POKERTEMPLATE_MESSAGE_MESSAGE_H_
-
+#endif
