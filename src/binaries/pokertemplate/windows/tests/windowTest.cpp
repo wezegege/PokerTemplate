@@ -18,29 +18,12 @@
  *
  */
 
-#include "threading/engine.h"
-using boost::shared_ptr;
-using boost::thread;
+#include "windows/console.h"
+#include <gtkmm/main.h>
 
-#include "threading/message.h"
-
-void Engine::Launch() {
-  thread_ = shared_ptr<thread>(new thread(Engine::StartThread, this));
+int main(int argc, char * argv[]) {
+  Gtk::Main gtkApp(argc, argv);
+  Console console;
+  Gtk::Main::run(console);
+  return 0;
 }
-
-void Engine::StartThread(Engine * engine) {
-  engine->Execute();
-}
-
-void Engine::Finalize() {
-  thread_->join();
-}
-
-void Engine::Receive(shared_ptr<Message> message) {
-  messages_.push_back(message);
-}
-
-Engine::Engine(EngineManager & engineManager) :
-  messages_(),
-  engineManager_(engineManager),
-  thread_() {}

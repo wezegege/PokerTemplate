@@ -17,30 +17,20 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#pragma once
+#ifndef POKERTEMPLATE_THREADING_MESSAGE_H_
+#define POKERTEMPLATE_THREADING_MESSAGE_H_
 
-#include "threading/engine.h"
-using boost::shared_ptr;
-using boost::thread;
+#include "threading/engineManager.h"
 
-#include "threading/message.h"
+class Message {
+  public:
+    int Type() { return type_; }
+    int Number() { return number_; }
 
-void Engine::Launch() {
-  thread_ = shared_ptr<thread>(new thread(Engine::StartThread, this));
-}
+  private:
+    int type_;
+    int number_;
+};
 
-void Engine::StartThread(Engine * engine) {
-  engine->Execute();
-}
-
-void Engine::Finalize() {
-  thread_->join();
-}
-
-void Engine::Receive(shared_ptr<Message> message) {
-  messages_.push_back(message);
-}
-
-Engine::Engine(EngineManager & engineManager) :
-  messages_(),
-  engineManager_(engineManager),
-  thread_() {}
+#endif

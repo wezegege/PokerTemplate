@@ -20,11 +20,11 @@
 #ifndef POKERTEMPLATE_THREADING_THREADMANAGER_H_
 #define POKERTEMPLATE_THREADING_THREADMANAGER_H_
 
-#include <vector>
 #include <boost/shared_ptr.hpp>
+#include <vector>
 #include "threading/engine.h"
+#include "threading/message.h"
 
-class Message;
 
 class EngineManager {
   public:
@@ -32,7 +32,8 @@ class EngineManager {
     int AddEngine(Type type, boost::shared_ptr<Engine> engine);
     void Initialize();
     void Finish();
-    void Send(Message & message);
+    void Send(boost::shared_ptr<Message> message);
+    EngineManager() : engines_() {}
   private:
     typedef std::vector< boost::shared_ptr<Engine> > EngineStreet;
     typedef std::vector<EngineStreet> EngineCity;

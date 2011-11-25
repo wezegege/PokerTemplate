@@ -18,12 +18,12 @@
  *
  */
 
-#include <boost/shared_ptr.hpp>
-
 #include "threading/engineManager.h"
+using boost::shared_ptr;
+#include "threading/message.h"
 
 void EngineManager::Initialize() {
-  for(int i = 0; i < 4; ++i) {
+  for (int i = 0; i < 4; ++i) {
     engines_.push_back(EngineStreet());
   }
 }
@@ -36,11 +36,15 @@ int EngineManager::AddEngine(Type type, boost::shared_ptr<Engine> engine) {
 }
 
 void EngineManager::Finish() {
-  for(EngineCity::iterator cityIt = engines_.begin();
+  for (EngineCity::iterator cityIt = engines_.begin();
       cityIt != engines_.end(); ++cityIt) {
-    for(EngineStreet::iterator streetIt = cityIt->begin();
+    for (EngineStreet::iterator streetIt = cityIt->begin();
         streetIt != cityIt->end(); ++streetIt) {
       (*streetIt)->Finalize();
     }
   }
+}
+
+void EngineManager::Send(shared_ptr<Message> message) {
+  engines_.at(message->Type()).at(message->Number())->Receive(message);
 }

@@ -20,7 +20,6 @@
 #include <iostream>
 using std::cout;
 using std::endl;
-#include <time.h>
 #include "threading/engineManager.h"
 #include "threading/engine.h"
 using boost::shared_ptr;
@@ -31,6 +30,7 @@ class TestEngine : public Engine {
     void Execute() {
       cout << "coucou" << endl;
     }
+    void Finalize() { Engine::Finalize(); }
     TestEngine(EngineManager  & em) : Engine(em) {}
 };
 
@@ -39,6 +39,5 @@ int main() {
   engineManager.Initialize();
   shared_ptr<TestEngine> engine(new TestEngine(engineManager));
   engineManager.AddEngine(EngineManager::SERVER, engine);
-  sleep(1);
   engineManager.Finish();
 }

@@ -18,29 +18,27 @@
  *
  */
 
+#pragma once
+#ifndef POKERTEMPLATE_WINDOWS_CONSOLE_H_
+#define POKERTEMPLATE_WINDOWS_CONSOLE_H_
+
 #include "threading/engine.h"
-using boost::shared_ptr;
-using boost::thread;
+#include <gtkmm/window.h>
+#include <gtkmm/button.h>
+#include <gtkmm/entry.h>
+#include <gtkmm/textbuffer.h>
+#include <gtkmm/textview.h>
 
-#include "threading/message.h"
+class Console : public Gtk::Window {
+  public:
+    void Initialize();
+    void Submit();
+    Console();
+  private:
+    Gtk::Button submitBtn_;
+    Gtk::Entry commandEntry_;
+    Gtk::TextView resultView_;
+    Glib::RefPtr<Gtk::TextBuffer> buffer_;
+};
 
-void Engine::Launch() {
-  thread_ = shared_ptr<thread>(new thread(Engine::StartThread, this));
-}
-
-void Engine::StartThread(Engine * engine) {
-  engine->Execute();
-}
-
-void Engine::Finalize() {
-  thread_->join();
-}
-
-void Engine::Receive(shared_ptr<Message> message) {
-  messages_.push_back(message);
-}
-
-Engine::Engine(EngineManager & engineManager) :
-  messages_(),
-  engineManager_(engineManager),
-  thread_() {}
+#endif

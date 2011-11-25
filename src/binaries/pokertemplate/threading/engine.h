@@ -23,25 +23,28 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
+#include <vector>
 
 class EngineManager;
 class Message;
 
 class Engine {
   public:
-    virtual void Initialize();
-    virtual void Execute();
-    virtual void Finalize();
+    virtual void Initialize() = 0;
+    virtual void Execute() = 0;
+    virtual void Finalize() = 0;
     void Launch();
-    void operator()();
-    void Receive(Message & message);
+    void Receive(boost::shared_ptr<Message> message);
 
-    Engine(EngineManager & engineManager);
+    explicit Engine(EngineManager & engineManager);
+    virtual ~Engine() {}
+  protected:
+    std::vector< boost::shared_ptr<Message> > messages_;
+    EngineManager & engineManager_;
+
   private:
     static void StartThread(Engine * engine);
-    EngineManager & engineManager_;
     boost::shared_ptr<boost::thread> thread_;
-
 };
 
 #endif
