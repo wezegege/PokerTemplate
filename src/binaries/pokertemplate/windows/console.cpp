@@ -19,56 +19,21 @@
  */
 
 #include "windows/console.h"
-#include <gtkmm/stock.h>
-#include <gtkmm/box.h>
-#include <gtkmm/scrolledwindow.h>
 
 void Console::Initialize() {
-  // Result view
-  resultView_.set_wrap_mode(Gtk::WRAP_WORD);
-  resultView_.set_editable(false);
-
-  Gtk::ScrolledWindow * scrolling = new Gtk::ScrolledWindow();
-  scrolling->set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
-  scrolling->add(resultView_);
-
-  // Command entry
-  commandEntry_.signal_activate().connect(sigc::mem_fun(this, &Console::Submit));
-
-  // Submit button
-  submitBtn_.set_can_focus(false);
-  submitBtn_.signal_clicked().connect(sigc::mem_fun(this, &Console::Submit));
-
-  // Horizontal Align
-  Gtk::HBox * hAlign = new Gtk::HBox();
-  hAlign->pack_start(commandEntry_);
-  hAlign->pack_start(submitBtn_, Gtk::PACK_SHRINK);
-
-  // Vertical Align
-  Gtk::VBox * vAlign = new Gtk::VBox();
-  vAlign->pack_start(*manage(scrolling));
-  vAlign->pack_start(*manage(hAlign), Gtk::PACK_SHRINK);
-
-  // Window Settings
-  resize(300, 400);
-  set_position(Gtk::WIN_POS_CENTER);
-  add(*manage(vAlign));
-  set_focus_child(commandEntry_);
-  show_all();
-}
-
-void Console::Submit() {
-  std::string command = commandEntry_.get_text();
-  buffer_->insert_at_cursor(command + "\n");
-  Gtk::TextIter iter = buffer_->end();
-  resultView_.scroll_to(iter);
-  commandEntry_.set_text("");
+  setWidgets();
 }
 
 Console::Console() :
-  submitBtn_(Gtk::Stock::OK),
-  commandEntry_(),
-  resultView_(),
-  buffer_(resultView_.get_buffer()) {
+  width_(300), height_(400), title_("Console"),
+  chat_() {
   Initialize();
+}
+
+void Console::setWidgets() {
+  set_default_size(width_, height_);
+  set_title(title_);
+  set_position(Gtk::WIN_POS_CENTER);
+  add(chat_);
+  show_all();
 }

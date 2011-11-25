@@ -7,6 +7,10 @@ add_executable(
   ${srcbin_dir}/pokertemplate/windows/tests/windowTest.cpp
   ${srcbin_dir}/pokertemplate/windows/console.h
   ${srcbin_dir}/pokertemplate/windows/console.cpp
+  ${srcbin_dir}/pokertemplate/widgets/chat.h
+  ${srcbin_dir}/pokertemplate/widgets/chat.cpp
+  ${srcbin_dir}/pokertemplate/utils/time.h
+  ${srcbin_dir}/pokertemplate/utils/time.cpp
   )
 link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(
@@ -25,8 +29,12 @@ message(STATUS "Test of console classes")
 add_executable(
   testConsole
   ${srcbin_dir}/pokertemplate/windows/tests/consoleTest.cpp
+  ${srcbin_dir}/pokertemplate/widgets/chat.h
+  ${srcbin_dir}/pokertemplate/widgets/chat.cpp
   ${srcbin_dir}/pokertemplate/windows/console.h
   ${srcbin_dir}/pokertemplate/windows/console.cpp
+  ${srcbin_dir}/pokertemplate/utils/time.h
+  ${srcbin_dir}/pokertemplate/utils/time.cpp
   )
 link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(

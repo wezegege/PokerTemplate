@@ -17,31 +17,41 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 #pragma once
-#ifndef POKERTEMPLATE_WINDOWS_CONSOLE_H_
-#define POKERTEMPLATE_WINDOWS_CONSOLE_H_
+#ifndef POKERTEMPLATE_WIDGETS_CHAT_H_
+#define POKERTEMPLATE_WIDGETS_CHAT_H_
 
-#include "threading/engine.h"
-#include "widgets/chat.h"
-#include <gtkmm/window.h>
+#include <gtkmm/box.h>
+#include <gtkmm/button.h>
+#include <gtkmm/entry.h>
+#include <gtkmm/textbuffer.h>
+#include <gtkmm/textview.h>
+#include <gtkmm/listviewtext.h>
 
-
-class Console : public Gtk::Window {
+class Chat : public Gtk::VBox {
   public:
     void Initialize();
+    void Submit();
+    void ShowUsers();
+    void Write(std::string name, std::string content);
 
-    Console();
+    Chat();
+
   private:
+    void createTags();
     void setWidgets();
 
     // Parameters
-    int width_;
-    int height_;
-    std::string title_;
+    bool showTimestamp_;
 
     // Widgets
-    Chat chat_;
+    Gtk::Button submitBtn_;
+    Gtk::Entry commandEntry_;
+    Gtk::TextView resultView_;
+    Glib::RefPtr<Gtk::TextBuffer> buffer_;
+    Gtk::ListViewText users_;
+    Gtk::Button showUsersBtn_;
 };
 
 #endif
+

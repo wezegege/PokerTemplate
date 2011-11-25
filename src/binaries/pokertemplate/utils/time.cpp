@@ -18,30 +18,30 @@
  *
  */
 
-#pragma once
-#ifndef POKERTEMPLATE_WINDOWS_CONSOLE_H_
-#define POKERTEMPLATE_WINDOWS_CONSOLE_H_
+#include "utils/time.h"
+using std::string;
+#include <ctime>
 
-#include "threading/engine.h"
-#include "widgets/chat.h"
-#include <gtkmm/window.h>
+string Time::Now(bool seconds, bool twelves) {
+  const int BUFFER_SIZE = 20;
+  time_t rawtime;
+  struct tm * timeinfo;
+  char buffer[BUFFER_SIZE];
+  string format = "%H:%M";
 
+  if(twelves) {
+    if(seconds) {
+      format = "%I:%M:%S%p";
+    } else {
+      format = "%I:%M%p";
+    }
+  } else if(seconds) {
+    format = "%H:%M:%S";
+  }
 
-class Console : public Gtk::Window {
-  public:
-    void Initialize();
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+  strftime(buffer, BUFFER_SIZE, format.c_str(), timeinfo);
+  return string(buffer);
+}
 
-    Console();
-  private:
-    void setWidgets();
-
-    // Parameters
-    int width_;
-    int height_;
-    std::string title_;
-
-    // Widgets
-    Chat chat_;
-};
-
-#endif

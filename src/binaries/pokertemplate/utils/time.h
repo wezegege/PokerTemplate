@@ -17,31 +17,16 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 #pragma once
-#ifndef POKERTEMPLATE_WINDOWS_CONSOLE_H_
-#define POKERTEMPLATE_WINDOWS_CONSOLE_H_
+#ifndef POKERTEMPLATE_UTILS_TIME_H_
+#define POKERTEMPLATE_UTILS_TIME_H_
 
-#include "threading/engine.h"
-#include "widgets/chat.h"
-#include <gtkmm/window.h>
+#include <string>
 
-
-class Console : public Gtk::Window {
+class Time {
   public:
-    void Initialize();
-
-    Console();
-  private:
-    void setWidgets();
-
-    // Parameters
-    int width_;
-    int height_;
-    std::string title_;
-
-    // Widgets
-    Chat chat_;
+    static std::string Now(bool seconds = false, bool twelves = false);
 };
 
 #endif
+
