@@ -35,5 +35,6 @@ void Console::setWidgets() {
   set_title(title_);
   set_position(Gtk::WIN_POS_CENTER);
   add(chat_);
-  show_all();
+  //show_all();
+  set_focus_child(chat_);
 }

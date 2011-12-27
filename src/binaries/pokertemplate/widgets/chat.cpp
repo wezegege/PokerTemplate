@@ -30,7 +30,6 @@ using Glib::RefPtr;
 #include <gtkmm/stock.h>
 #include <gtkmm/box.h>
 using Gtk::HBox;
-#include <gtkmm/scrolledwindow.h>
 using Gtk::ScrolledWindow;
 #include <gtkmm/buttonbox.h>
 using Gtk::HButtonBox;
@@ -41,18 +40,31 @@ void Chat::Initialize() {
 }
 
 void Chat::ShowUsers() {
-  users_.set_visible(!users_.get_visible());
+  userScroll_.set_visible(!userScroll_.get_visible());
+}
+
+void Chat::ShowSubmit() {
+  if(commandEntry_.get_text_length()) {
+    if(!submitBtn_.get_visible()) {
+      submitBtn_.show();
+    }
+  } else if(submitBtn_.get_visible()) {
+    submitBtn_.hide();
+  }
 }
 
 void Chat::Submit() {
-  string command = commandEntry_.get_text();
-  Write("Admin", command);
-  commandEntry_.set_text("");
+  if (commandEntry_.get_text_length()) {
+    string command = commandEntry_.get_text();
+    commandEntry_.set_text("");
+    signal_message_sent().emit(command);
+  }
 }
 
 void Chat::Write(string name, string content) {
   TextIter iter = buffer_->end();
   buffer_->create_mark("begin", iter);
+
   // time
   if(showTimestamp_) {
     buffer_->insert_at_cursor("[" + Time::Now() + "]");
@@ -61,10 +73,13 @@ void Chat::Write(string name, string content) {
   // name
   iter = buffer_->end();
   buffer_->create_mark("beginName", iter);
-  buffer_->insert_at_cursor("[" + name + "]:");
+  buffer_->insert_at_cursor("<" + name + "> ");
   TextIter beginIter = buffer_->get_iter_at_mark(buffer_->get_mark("beginName"));
   iter = buffer_->end();
   buffer_->apply_tag_by_name("User", beginIter, iter);
+
+  beginIter = buffer_->get_iter_at_mark(buffer_->get_mark("begin"));
+  buffer_->apply_tag_by_name("Name", beginIter, iter);
 
   //content
   buffer_->insert_at_cursor(content);
@@ -82,6 +97,7 @@ Chat::Chat() :
   resultView_(),
   buffer_(resultView_.get_buffer()),
   users_(1),
+  userScroll_(),
   showUsersBtn_("show users") {
     Initialize();
   }
@@ -109,17 +125,17 @@ void Chat::setWidgets() {
   users_.append("Admin");
   users_.append("Console");
 
-  ScrolledWindow * userScroll = new ScrolledWindow();
-  userScroll->set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
-  userScroll->add(users_);
+  userScroll_.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
+  userScroll_.add(users_);
 
   // Second level
   HBox * secondLvl = new HBox();
   secondLvl->pack_start(*manage(messageScroll));
-  secondLvl->pack_start(*manage(userScroll), Gtk::PACK_SHRINK);
+  secondLvl->pack_start(userScroll_, Gtk::PACK_SHRINK);
 
   // Command entry
   commandEntry_.signal_activate().connect(mem_fun(this, &Chat::Submit));
+  commandEntry_.signal_changed().connect(mem_fun(this, &Chat::ShowSubmit));
 
   // Submit button
   submitBtn_.set_can_focus(false);
@@ -137,12 +153,16 @@ void Chat::setWidgets() {
 
   // Window Settings
   set_focus_child(commandEntry_);
+  show_all();
+  submitBtn_.hide();
+  userScroll_.hide();
 }
 
 void Chat::createTags() {
   buffer_->create_tag("User");
+  Glib::RefPtr<TextBuffer::Tag> tag = buffer_->create_tag("Name");
+  tag->property_foreground() = "red";
 
-  Glib::RefPtr<TextBuffer::Tag> tag = buffer_->create_tag("System");
-  tag->property_foreground() = "orange";
+  buffer_->create_tag("System");
 }
 

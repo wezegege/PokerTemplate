@@ -15,12 +15,13 @@ add_executable(
 link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(
   ${srcbin_dir}/pokertemplate
-  ${GTKMM_INCLUDE_DIRS})
+  ${GTKMM_INCLUDE_DIRS}
+  /usr/lib64)
 target_link_libraries(
   testWindow
   ${GTKMM_LIBRARIES}
-  boost_thread)
-add_test(testConsole ${testbin_dir}/testConsole)
+  stdc++)
+add_test(testWindow ${testbin_dir}/testWindow)
 
 ###########################################################
 message(STATUS "Test of console classes")
@@ -39,10 +40,11 @@ add_executable(
 link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(
   ${srcbin_dir}/pokertemplate
-  ${GTKMM_INCLUDE_DIRS})
+  ${GTKMM_INCLUDE_DIRS}
+  /usr/lib64)
 target_link_libraries(
   testConsole
   ${GTKMM_LIBRARIES}
-  boost_thread)
+  stdc++)
 add_test(testConsole ${testbin_dir}/testConsole)
 

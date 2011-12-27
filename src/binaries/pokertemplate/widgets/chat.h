@@ -27,19 +27,27 @@
 #include <gtkmm/textbuffer.h>
 #include <gtkmm/textview.h>
 #include <gtkmm/listviewtext.h>
+#include <gtkmm/scrolledwindow.h>
 
 class Chat : public Gtk::VBox {
   public:
     void Initialize();
     void Submit();
     void ShowUsers();
+    void ShowSubmit();
     void Write(std::string name, std::string content);
+
+    sigc::signal<void, std::string> signal_message_sent() {
+      return signal_message_sent_;
+    }
 
     Chat();
 
   private:
     void createTags();
     void setWidgets();
+
+    sigc::signal<void, std::string> signal_message_sent_;
 
     // Parameters
     bool showTimestamp_;
@@ -50,6 +58,7 @@ class Chat : public Gtk::VBox {
     Gtk::TextView resultView_;
     Glib::RefPtr<Gtk::TextBuffer> buffer_;
     Gtk::ListViewText users_;
+    Gtk::ScrolledWindow  userScroll_;
     Gtk::Button showUsersBtn_;
 };
 

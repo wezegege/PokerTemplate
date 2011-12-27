@@ -11,9 +11,12 @@ add_executable(
   ${srcbin_dir}/pokertemplate/threading/engineManager.cpp
   ${srcbin_dir}/pokertemplate/threading/engineManager.h
   )
-include_directories(${srcbin_dir}/pokertemplate)
+include_directories(
+  ${srcbin_dir}/pokertemplate
+  /usr/lib64)
 target_link_libraries(
   testThread
-  boost_thread)
+  boost_thread
+  stdc++)
 add_test(testThread ${testbin_dir}/testThread)
 
