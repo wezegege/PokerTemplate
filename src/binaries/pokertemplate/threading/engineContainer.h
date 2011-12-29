@@ -18,19 +18,22 @@
  *
  */
 #pragma once
-#ifndef POKERTEMPLATE_THREADING_MESSAGE_H_
-#define POKERTEMPLATE_THREADING_MESSAGE_H_
+#ifndef POKERTEMPLATE_THREADING_ENGINECONTAINER_H_
+#define POKERTEMPLATE_THREADING_ENGINECONTAINER_H_
 
-#include "threading/engineManager.h"
+#include <map>
 
-class Message {
+template<typename Index>
+class EngineContainer<Index> {
   public:
-    int Type() { return type_; }
-    int Number() { return number_; }
+    void Add(Index index, Engine * engine);
+    void Receive(const Message & message);
 
   private:
-    int type_;
-    int number_;
+    std::map<Index, Engine *> list_;
 };
 
+#include "engineContainer.hpp"
+
 #endif
+

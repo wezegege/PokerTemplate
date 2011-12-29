@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @section LICENSE
  *
  * This file is part of Pokertemplate.
@@ -18,12 +18,10 @@
  *
  */
 
-#include "../console.h"
-#include <gtkmm/main.h>
+void EngineContainer::Add(Index index, Engine * engine) {
+  list_.append(index, engine);
+}
 
-int main(int argc, char * argv[]) {
-  Gtk::Main gtkApp(argc, argv);
-  Console console;
-  Gtk::Main::run(console);
-  return 0;
+void EngineContainer::Receive(const Message & message) {
+  list_.at(message.Recipient()).Receive(message);
 }

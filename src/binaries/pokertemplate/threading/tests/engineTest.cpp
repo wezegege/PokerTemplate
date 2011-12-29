@@ -20,8 +20,8 @@
 #include <iostream>
 using std::cout;
 using std::endl;
-#include "threading/engineManager.h"
-#include "threading/engine.h"
+#include "../engineManager.h"
+#include "../engine.h"
 using boost::shared_ptr;
 
 class TestEngine : public Engine {

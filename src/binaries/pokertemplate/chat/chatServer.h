@@ -17,13 +17,24 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#pragma once
+#ifndef POKERTEMPLATE_CHAT_CHATSERVER_H_
+#define POKERTEMPLATE_CHAT_CHATSERVER_H_
 
-#include "../console.h"
-#include <gtkmm/main.h>
+#include "threading/engine.h"
+#include "threading/engineContainer.h"
+#include "type.h"
 
-int main(int argc, char * argv[]) {
-  Gtk::Main gtkApp(argc, argv);
-  Console console;
-  Gtk::Main::run(console);
-  return 0;
-}
+class ChatServer : public Engine {
+  public:
+    static EngineContainer<ChannelUid> Container;
+
+    ChatServer(ChannelUid channelName);
+
+  private:
+    ChannelUid name_;
+
+};
+
+#endif
+

@@ -18,12 +18,11 @@
  *
  */
 
-#include "../console.h"
-#include <gtkmm/main.h>
+#include "chatServer.h"
 
-int main(int argc, char * argv[]) {
-  Gtk::Main gtkApp(argc, argv);
-  Console console;
-  Gtk::Main::run(console);
-  return 0;
+ChatServer::ChatServer(ChannelUid channelName) :
+    Engine(),
+    name_(channelName) {
+  ChatServer::Container.add(name_, this);
 }
+

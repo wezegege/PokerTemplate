@@ -18,7 +18,7 @@
  *
  */
 
-#include "widgets/chat.h"
+#include "chat.h"
 using std::string;
 
 using Gtk::TextIter;
@@ -26,7 +26,7 @@ using Gtk::Button;
 using Gtk::TextBuffer;
 using sigc::mem_fun;
 using Glib::RefPtr;
-#include "utils/time.h"
+#include "../utils/time.h"
 #include <gtkmm/stock.h>
 #include <gtkmm/box.h>
 using Gtk::HBox;
@@ -57,7 +57,7 @@ void Chat::Submit() {
   if (commandEntry_.get_text_length()) {
     string command = commandEntry_.get_text();
     commandEntry_.set_text("");
-    signal_message_sent().emit(command);
+    //TODO: send message
   }
 }
 

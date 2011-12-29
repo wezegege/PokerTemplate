@@ -17,13 +17,14 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#pragma once
+#ifndef POKERTEMPLATE_TYPES_H_
+#define POKERTEMPLATE_TYPES_H_
 
-#include "../console.h"
-#include <gtkmm/main.h>
+#include <wstring>
 
-int main(int argc, char * argv[]) {
-  Gtk::Main gtkApp(argc, argv);
-  Console console;
-  Gtk::Main::run(console);
-  return 0;
-}
+typedef std::wstring ChannelUid;
+typedef std::wstring UserUid;
+
+#endif
+

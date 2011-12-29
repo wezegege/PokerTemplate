@@ -18,7 +18,7 @@
  *
  */
 
-#include "windows/console.h"
+#include "console.h"
 
 void Console::Initialize() {
   setWidgets();

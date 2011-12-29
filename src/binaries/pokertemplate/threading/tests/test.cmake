@@ -7,7 +7,7 @@ add_executable(
   ${srcbin_dir}/pokertemplate/threading/tests/engineTest.cpp
   ${srcbin_dir}/pokertemplate/threading/engine.cpp
   ${srcbin_dir}/pokertemplate/threading/engine.h
-  ${srcbin_dir}/pokertemplate/threading/message.h
+  ${srcbin_dir}/pokertemplate/message/message.h
   ${srcbin_dir}/pokertemplate/threading/engineManager.cpp
   ${srcbin_dir}/pokertemplate/threading/engineManager.h
   )

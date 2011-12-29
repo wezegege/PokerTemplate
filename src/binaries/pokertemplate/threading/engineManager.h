@@ -20,10 +20,10 @@
 #ifndef POKERTEMPLATE_THREADING_THREADMANAGER_H_
 #define POKERTEMPLATE_THREADING_THREADMANAGER_H_
 
+#include "engine.h"
+#include "../message/message.h"
 #include <boost/shared_ptr.hpp>
 #include <vector>
-#include "threading/engine.h"
-#include "threading/message.h"
 
 
 class EngineManager {

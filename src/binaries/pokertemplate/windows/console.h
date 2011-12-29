@@ -22,8 +22,8 @@
 #ifndef POKERTEMPLATE_WINDOWS_CONSOLE_H_
 #define POKERTEMPLATE_WINDOWS_CONSOLE_H_
 
-#include "threading/engine.h"
-#include "widgets/chat.h"
+#include "../threading/engine.h"
+#include "../widgets/chat.h"
 #include <gtkmm/window.h>
 
 

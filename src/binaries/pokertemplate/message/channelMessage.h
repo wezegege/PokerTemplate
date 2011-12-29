@@ -17,13 +17,18 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#pragma once
+#ifndef POKERTEMPLATE_MESSAGE_CHANNELMESSAGE_H_
+#define POKERTEMPLATE_MESSAGE_CHANNELMESSAGE_H_
 
-#include "../console.h"
-#include <gtkmm/main.h>
+#include "message/message.h"
 
-int main(int argc, char * argv[]) {
-  Gtk::Main gtkApp(argc, argv);
-  Console console;
-  Gtk::Main::run(console);
-  return 0;
-}
+class ChannelMessage : public Message {
+  public:
+
+  private:
+
+};
+
+#endif
+

@@ -18,11 +18,11 @@
  *
  */
 
-#include "threading/engine.h"
+#include "engine.h"
 using boost::shared_ptr;
 using boost::thread;
 
-#include "threading/message.h"
+#include "../message/message.h"
 
 void Engine::Launch() {
   thread_ = shared_ptr<thread>(new thread(Engine::StartThread, this));

@@ -18,9 +18,9 @@
  *
  */
 
-#include "threading/engineManager.h"
+#include "engineManager.h"
 using boost::shared_ptr;
-#include "threading/message.h"
+#include "../message/message.h"
 
 void EngineManager::Initialize() {
   for (int i = 0; i < 4; ++i) {
