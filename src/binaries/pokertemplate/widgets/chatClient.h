@@ -29,7 +29,7 @@
 #include <gtkmm/listviewtext.h>
 #include <gtkmm/scrolledwindow.h>
 
-class Chat : public Gtk::VBox {
+class ChatClient : public Gtk::VBox {
   public:
     void Initialize();
     void Submit();

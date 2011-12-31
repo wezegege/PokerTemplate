@@ -34,16 +34,16 @@ using Gtk::ScrolledWindow;
 #include <gtkmm/buttonbox.h>
 using Gtk::HButtonBox;
 
-void Chat::Initialize() {
+void ChatClient::Initialize() {
   createTags();
   setWidgets();
 }
 
-void Chat::ShowUsers() {
+void ChatClient::ShowUsers() {
   userScroll_.set_visible(!userScroll_.get_visible());
 }
 
-void Chat::ShowSubmit() {
+void ChatClient::ShowSubmit() {
   if(commandEntry_.get_text_length()) {
     if(!submitBtn_.get_visible()) {
       submitBtn_.show();
@@ -53,7 +53,7 @@ void Chat::ShowSubmit() {
   }
 }
 
-void Chat::Submit() {
+void ChatClient::Submit() {
   if (commandEntry_.get_text_length()) {
     string command = commandEntry_.get_text();
     commandEntry_.set_text("");
@@ -61,7 +61,7 @@ void Chat::Submit() {
   }
 }
 
-void Chat::Write(string name, string content) {
+void ChatClient::Write(string name, string content) {
   TextIter iter = buffer_->end();
   buffer_->create_mark("begin", iter);
 
@@ -90,7 +90,7 @@ void Chat::Write(string name, string content) {
   buffer_->insert_at_cursor("\n");
 }
 
-Chat::Chat() :
+ChatClient::ChatClient() :
   showTimestamp_(true),
   submitBtn_(Gtk::Stock::OK),
   commandEntry_(),
@@ -102,10 +102,10 @@ Chat::Chat() :
     Initialize();
   }
 
-void Chat::setWidgets() {
+void ChatClient::setWidgets() {
   // Show user button
   showUsersBtn_.set_can_focus(false);
-  showUsersBtn_.signal_clicked().connect(mem_fun(this, &Chat::ShowUsers));
+  showUsersBtn_.signal_clicked().connect(mem_fun(this, &ChatClient::ShowUsers));
 
   // First level
   HButtonBox * firstLvl = new HButtonBox(Gtk::BUTTONBOX_END);
@@ -134,12 +134,12 @@ void Chat::setWidgets() {
   secondLvl->pack_start(userScroll_, Gtk::PACK_SHRINK);
 
   // Command entry
-  commandEntry_.signal_activate().connect(mem_fun(this, &Chat::Submit));
-  commandEntry_.signal_changed().connect(mem_fun(this, &Chat::ShowSubmit));
+  commandEntry_.signal_activate().connect(mem_fun(this, &ChatClient::Submit));
+  commandEntry_.signal_changed().connect(mem_fun(this, &ChatClient::ShowSubmit));
 
   // Submit button
   submitBtn_.set_can_focus(false);
-  submitBtn_.signal_clicked().connect(mem_fun(this, &Chat::Submit));
+  submitBtn_.signal_clicked().connect(mem_fun(this, &ChatClient::Submit));
 
   // Third level
   HBox * thirdLvl = new HBox();
@@ -158,7 +158,7 @@ void Chat::setWidgets() {
   userScroll_.hide();
 }
 
-void Chat::createTags() {
+void ChatClient::createTags() {
   buffer_->create_tag("User");
   Glib::RefPtr<TextBuffer::Tag> tag = buffer_->create_tag("Name");
   tag->property_foreground() = "red";
