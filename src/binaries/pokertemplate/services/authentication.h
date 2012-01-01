@@ -26,7 +26,7 @@
 class Authentication {
   public:
     bool CheckAuthentication(UserUID userUid);
-    inline UserUID GetAuthentication() { return userUid_; }
+    inline UserUID UserUID() { return userUid_; }
 
   private:
     UserUID userUid_;

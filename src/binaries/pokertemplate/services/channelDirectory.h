@@ -21,10 +21,14 @@
 #ifndef POKERTEMPLATE_SERVICES_CHANNELDIRECTORY_H_
 #define POKERTEMPLATE_SERVICES_CHANNELDIRECTORY_H_
 
+#include "../types.h"
 class ChannelDirectory {
   public:
+    void Redirect(const ChannelMessage & message);
 
   private:
+    Authentication & auth_;
+    std::map<ChannelUID, UserUID> index_;
 
 };
 

@@ -17,24 +17,17 @@
  * along with Pokertemplate.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#pragma once
-#ifndef POKERTEMPLATE_MESSAGE_CHANNELMESSAGE_H_
-#define POKERTEMPLATE_MESSAGE_CHANNELMESSAGE_H_
 
-#include "message.h"
-#include "../types.h"
+#include "channelDirectory.h"
 
-class ChannelMessage : public Message {
-  public:
-    inline ChannelUID Channel() { return channel_; }
-    inline UserUID Sender() { return sender_; }
+#include "../message/channelMessage.h"
 
-  private:
-    ChannelUID channel_;
-    UserUID sender_;
-    std::wstring content_;
-
-};
-
-#endif
+void ChannelDirectory::Redirect(const ChannelMessage & message) {
+  UserUID uid = auth_.UserUID();
+  if(index_[message.Channel()] == uid) {
+    // TODO send to server
+  } else {
+    // TODO send to network
+  }
+}
 
